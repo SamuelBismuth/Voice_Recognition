@@ -1,0 +1,11 @@
+Biographical Data
+
+    birth place: fairfax, virginia, usa (map)
+    native language: english (eng)
+    other language(s): none
+    age, sex: 62, male
+    age of english onset: 0
+    english learning method: naturalistic
+    english residence: usa
+    length of english residence: 62 years
+

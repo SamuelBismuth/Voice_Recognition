@@ -1,0 +1,11 @@
+Biographical Data
+
+    birth place: khabarovsk, russia (map)
+    native language: russian (rus)
+    other language(s): hebrew
+    age, sex: 25, female
+    age of english onset: 15
+    english learning method: academic
+    english residence: usa
+    length of english residence: 0.3 years
+

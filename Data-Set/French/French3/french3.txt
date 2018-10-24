@@ -1,0 +1,11 @@
+Biographical Data
+
+    birth place: st. laurent d'onay, france (map)
+    native language: french (fra)
+    other language(s): spanish
+    age, sex: 20, female
+    age of english onset: 12
+    english learning method: academic
+    english residence: usa
+    length of english residence: 0.4 years
+

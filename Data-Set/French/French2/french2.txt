@@ -1,0 +1,11 @@
+Biographical Data
+
+    birth place: tunis, tunisia (map)
+    native language: french (fra)
+    other language(s): arabic
+    age, sex: 19, male
+    age of english onset: 14
+    english learning method: academic
+    english residence: usa
+    length of english residence: 0.5 years
+

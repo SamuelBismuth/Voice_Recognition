@@ -1,0 +1,11 @@
+Biographical Data
+
+    birth place: birmingham, uk (map)
+    native language: english (eng)
+    other language(s): german mandarin
+    age, sex: 30, female
+    age of english onset: 0
+    english learning method: naturalistic
+    english residence: uk
+    length of english residence: 30 years
+

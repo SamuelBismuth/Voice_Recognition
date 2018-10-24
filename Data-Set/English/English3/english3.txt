@@ -1,0 +1,11 @@
+Biographical Data
+
+    birth place: brisbane, australia (map)
+    native language: english (eng)
+    other language(s): none
+    age, sex: 26, female
+    age of english onset: 0
+    english learning method: naturalistic
+    english residence: australia
+    length of english residence: 26 years
+

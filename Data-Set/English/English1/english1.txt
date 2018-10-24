@@ -1,0 +1,11 @@
+Biographical Data
+
+    birth place: pittsburgh, pennsylvania, usa (map)
+    native language: english (eng)
+    other language(s): mandarin
+    age, sex: 42, male
+    age of english onset: 0
+    english learning method: naturalistic
+    english residence: usa
+    length of english residence: 41 years
+

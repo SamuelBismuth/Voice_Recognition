@@ -1,0 +1,11 @@
+Biographical Data
+
+    birth place: haifa, israel (map)
+    native language: hebrew (heb)
+    other language(s): spanish
+    age, sex: 20, female
+    age of english onset: 9
+    english learning method: academic
+    english residence: canada
+    length of english residence: 0.5 years
+
