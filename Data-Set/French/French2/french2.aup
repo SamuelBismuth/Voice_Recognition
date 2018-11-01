@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="french2_data" version="1.3.0" audacityversion="2.2.1" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="0.0000000000" zoom="16.8403262996" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="french2" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="2060928">
+				<waveblock start="0">
+					<simpleblockfile filename="e000012d.au" len="262144" min="-0.716754" max="0.708109" rms="0.127486"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e0000721.au" len="262144" min="-0.791413" max="0.612896" rms="0.106916"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0000d9b.au" len="262144" min="-0.707085" max="0.707443" rms="0.1175"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="e00003b6.au" len="262144" min="-0.871658" max="0.812368" rms="0.156265"/>
+				</waveblock>
+				<waveblock start="1048576">
+					<simpleblockfile filename="e000007d.au" len="262144" min="-0.714409" max="0.575671" rms="0.120032"/>
+				</waveblock>
+				<waveblock start="1310720">
+					<simpleblockfile filename="e0000d48.au" len="262144" min="-0.758528" max="0.688184" rms="0.142881"/>
+				</waveblock>
+				<waveblock start="1572864">
+					<simpleblockfile filename="e000044c.au" len="262144" min="-0.723863" max="0.675475" rms="0.146853"/>
+				</waveblock>
+				<waveblock start="1835008">
+					<simpleblockfile filename="e0000aa5.au" len="225920" min="-0.675525" max="0.545022" rms="0.097036"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
