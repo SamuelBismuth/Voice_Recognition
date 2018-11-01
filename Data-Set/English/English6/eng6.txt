@@ -1,0 +1,9 @@
+Biographical Data
+birth place: brooklyn, new york, usa (map)
+native language: english (eng)
+other language(s): french spanish
+age, sex: 45, female
+age of english onset: 0
+english learning method: naturalistic
+english residence: usa
+length of english residence: 45 years
