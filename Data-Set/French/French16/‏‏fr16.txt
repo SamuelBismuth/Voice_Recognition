@@ -1,9 +1,11 @@
 Biographical Data
-birth place: montreal, quebec, canada (map)
-native language: french (fra)
-other language(s): spanish
-age, sex: 19, female
-age of english onset: 7
-english learning method: academic
-english residence: canada
-length of english residence: 19 years
+
+    birth place: landerneau, brittany, france (map)
+    native language: french (fra)
+    other language(s): none
+    age, sex: 66, female
+    age of english onset: 12
+    english learning method: academic
+    english residence: usa
+    length of english residence: 45 years
+

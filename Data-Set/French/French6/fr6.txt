@@ -1,9 +1,11 @@
 Biographical Data
-birth place: booue, gabon (map)
-native language: french (fra)
-other language(s): none
-age, sex: 26, female
-age of english onset: 13
-english learning method: academic
-english residence: usa
-length of english residence: 1 years
+
+    birth place: aix-en-provence, france (map)
+    native language: french (fra)
+    other language(s): german italian farsi arabic
+    age, sex: 53, female
+    age of english onset: 11
+    english learning method: academic
+    english residence: usa
+    length of english residence: 14 years
+

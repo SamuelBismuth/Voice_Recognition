@@ -1,11 +1,11 @@
 Biographical Data
 
-    birth place: douala, cameroon (map)
+    birth place: bordeaux, france (map)
     native language: french (fra)
-    other language(s): pidgin banganthe
-    age, sex: 36, female
-    age of english onset: 11
+    other language(s): none
+    age, sex: 18, female
+    age of english onset: 8
     english learning method: academic
-    english residence: usa
-    length of english residence: 4 years
+    english residence:
+    length of english residence: 0 years
 

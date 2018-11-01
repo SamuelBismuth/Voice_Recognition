@@ -1,3 +1,6 @@
+#https://github.com/jameslyons/python_speech_features/blob/master/example.py
+#https://github.com/jameslyons/python_speech_features/blob/master/README.rst
+
 from python_speech_features import mfcc
 from python_speech_features import delta
 from python_speech_features import logfbank

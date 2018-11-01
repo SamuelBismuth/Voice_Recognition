@@ -1,9 +1,10 @@
 Biographical Data
-birth place: perth, australia (map)
-native language: english (eng)
-other language(s): french
-age, sex: 21, female
-age of english onset: 0
-english learning method: naturalistic
-english residence: australia,usa
-length of english residence: 4 years
+
+    birth place: glasgow, scotland, uk (map)
+    native language: english (eng)
+    other language(s): none
+    age, sex: 34, male
+    age of english onset: 0
+    english learning method: naturalistic
+    english residence: uk, canada
+    length of english residence: 34 years
