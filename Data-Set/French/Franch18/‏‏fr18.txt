@@ -1,0 +1,9 @@
+Biographical Data
+birth place: washington, dc, usa (map)
+native language: french (fra)
+other language(s): spanish chinese arabic
+age, sex: 22, male
+age of english onset: 6
+english learning method: academic
+english residence: uk
+length of english residence: 0.3 years
