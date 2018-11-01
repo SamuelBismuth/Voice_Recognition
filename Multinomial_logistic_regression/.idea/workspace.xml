@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c13e069-4ad8-4ce8-8e60-b2b85d086cd1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mmfc.py" beforeDir="false" afterPath="$PROJECT_DIR$/mmfc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mmfc.py" beforeDir="false" afterPath="$PROJECT_DIR$/mfcc.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,10 +14,10 @@
     <session id="1073512083">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.open.time.4" value="2" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.4" value="3" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -32,13 +32,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="11" />
+          <entry key="dummy" value="13" />
           <entry key="py" value="106" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="PLAIN_TEXT" value="13" />
           <entry key="Python" value="106" />
         </counts>
       </usages-collector>
@@ -65,12 +65,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mmfc.py">
+        <entry file="file://$PROJECT_DIR$/mfcc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+            <state relative-caret-position="120">
+              <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#155#194#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -145,7 +145,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.mmfc">
+  <component name="RunManager" selected="Python.mfcc">
     <configuration name="logistic_regression" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Multinomial_logistic_regression" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -167,7 +167,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="mmfc" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="mfcc" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Multinomial_logistic_regression" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -179,7 +179,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mmfc.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mfcc.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -190,11 +190,11 @@
     </configuration>
     <list>
       <item itemvalue="Python.logistic_regression" />
-      <item itemvalue="Python.mmfc" />
+      <item itemvalue="Python.mfcc" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.mmfc" />
+        <item itemvalue="Python.mfcc" />
         <item itemvalue="Python.logistic_regression" />
       </list>
     </recent_temporary>
@@ -214,7 +214,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25245902" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -255,12 +254,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mmfc.py">
+    <entry file="file://$PROJECT_DIR$/mfcc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+        <state relative-caret-position="120">
+          <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#155#194#0" expanded="true" />
           </folding>
         </state>
       </provider>
