@@ -7,9 +7,12 @@ from python_speech_features import logfbank
 import scipy.io.wavfile as wav
 
 
-def wav_to_mffc(path):  # see in details how to use it.
-    (rate, sig) = wav.read(path)
-    mfcc_feat = mfcc(sig,rate)
+def wav_to_mfcc(path):
+    """
+    see in details how to use it.
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig,rate)
-    print(fbank_feat[1:10, :])
+    """
+    (rate, sig) = wav.read(path)
+    mfcc_feat = mfcc(sig,rate)
+    return mfcc_feat
