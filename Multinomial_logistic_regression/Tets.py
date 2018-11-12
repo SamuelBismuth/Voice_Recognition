@@ -4,26 +4,28 @@ import tensorflow as tf
 import numpy as np
 
 # number of features
-num_features = 784
+num_features = 100
 # number of target labels
 num_labels = 5
 # learning rate (alpha)
-learning_rate = 0.05
+learning_rate = 0.01
 # batch size
 batch_size = 10
 # number of epochs
-num_steps = 1001
+num_steps = 5001
 
 # input data
-#train_dataset = np.array([data[i].mfcc for i in range(len(data))])
-#train_labels = mnist.train.labels
+# train_dataset = np.array([data[i].mfcc for i in range(len(data))])
+# train_labels = mnist.train.labels
 #test_dataset = mnist.test.images
 #test_labels = mnist.test.labels
 #valid_dataset = mnist.validation.images
 #valid_labels = mnist.validation.labels
 
+
 # initialize a tensorflow graph
 graph = tf.Graph()
+
 
 # utility function to calculate accuracy
 def accuracy(predictions, labels):
@@ -34,8 +36,11 @@ def accuracy(predictions, labels):
 
 def softmaxTest(data):
 
-    train_dataset = np.array([data[i].mfcc for i in range(len(data))])
-    train_labels = np.array([data[i].accent for i in range(len(data))])
+    train_dataset = np.array([data[i].mfcc for i in range(len(data) - 10)])
+    train_labels = np.array([data[i].accent for i in range(len(data) - 10)])
+
+    test_dataset = np.array([data[i].mfcc for i in range(len(data) - 10, len(data))]).astype(np.float32)
+    test_labels = np.array([data[i].accent for i in range(len(data) - 10, len(data))])
 
     with graph.as_default():
         """ 
@@ -46,7 +51,7 @@ def softmaxTest(data):
         tf_train_dataset = tf.placeholder(tf.float32, shape=(batch_size, num_features))
         tf_train_labels = tf.placeholder(tf.float32, shape=(batch_size, num_labels))
         # tf_valid_dataset = tf.constant(valid_dataset)
-        # tf_test_dataset = tf.constant(test_dataset)
+        tf_test_dataset = tf.constant(test_dataset)
 
         # Variables.
         weights = tf.Variable(tf.truncated_normal([num_features, num_labels]))
@@ -64,7 +69,7 @@ def softmaxTest(data):
         train_prediction = tf.nn.softmax(logits)
         valid_prediction = tf.nn.softmax(tf.matmul(tf_train_dataset, weights) + biases)
         # valid_prediction = tf.nn.softmax(tf.matmul(tf_valid_dataset, weights) + biases)
-        # test_prediction = tf.nn.softmax(tf.matmul(tf_test_dataset, weights) + biases)
+        test_prediction = tf.nn.softmax(tf.matmul(tf_test_dataset, weights) + biases)
 
         with tf.Session(graph=graph) as session:
             # initialize weights and biases
@@ -93,8 +98,8 @@ def softmaxTest(data):
                     #print("Validation accuracy: {:.1f}%".format(
                        # accuracy(valid_prediction.eval(), valid_labels)))
 
-            #print("\nTest accuracy: {:.1f}%".format(
-                #accuracy(test_prediction.eval(), test_labels)))
+            print("\nTest accuracy: {:.1f}%".format(
+                accuracy(test_prediction.eval(), test_labels)))
 
 
 

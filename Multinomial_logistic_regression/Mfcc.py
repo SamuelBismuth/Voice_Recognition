@@ -21,4 +21,4 @@ def wav_to_mfcc(path):
         for j in range(len(mfcc_feat[0])):
             array_mfcc.append(mfcc_feat[i][j])
     # By default we want the 784 first indexes but change this.
-    return array_mfcc[0:784]
+    return array_mfcc[0:100]
