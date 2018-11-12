@@ -2,6 +2,7 @@
   <dictionary name="sam">
     <words>
       <w>mfcc</w>
+      <w>softmax</w>
     </words>
   </dictionary>
 </component>
