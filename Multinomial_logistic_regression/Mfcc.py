@@ -15,4 +15,4 @@ def wav_to_mfcc(path):
     """
     (rate, sig) = wav.read(path)
     mfcc_feat = mfcc(sig,rate)
-    return mfcc_feat[1]
+    return mfcc_feat[1, 1]

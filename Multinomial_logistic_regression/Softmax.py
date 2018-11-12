@@ -22,15 +22,16 @@ def softmax(data):
     y_ = tf.placeholder(tf.float32, [None, categories])
     W = tf.Variable(tf.zeros([features, categories]))
     b = tf.Variable(tf.zeros([categories]))
-
     y = tf.nn.softmax(tf.matmul(x, W) + b)
     loss = -tf.reduce_mean(y_*tf.log(y))
-
     update = tf.train.GradientDescentOptimizer(0.00001).minimize(loss)
-
-    data_x = np.array([data[i].mfcc for i in range(len(data))])
+    # Type: <class 'numpy.ndarray'>
+    data_x = [data[i].mfcc for i in range(len(data))]
     data_y = np.array([data[i].accent for i in range(len(data))])
-
+    print(data_x)
+    print(data_y)
     sess = tf.Session()
-
+    sess.run(tf.global_variables_initializer())
+    for i in range(0, 10000):
+        sess.run(update, feed_dict={x: data_x, y_: data_y})
     print('Prediction for: 60"' + ': "', sess.run(y, feed_dict={x: [data[60].mfcc]}))
