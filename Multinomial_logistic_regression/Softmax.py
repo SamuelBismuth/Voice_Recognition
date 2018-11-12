@@ -18,18 +18,18 @@ features = 1
 
 
 def softmax(data):
-    x = tf.placeholder(tf.float32, [None, features])
+    x = tf.placeholder(tf.float32, shape=(10, 10))
     y_ = tf.placeholder(tf.float32, [None, categories])
-    W = tf.Variable(tf.zeros([features, categories]))
+    W = tf.Variable(tf.zeros([10, 10]))
     b = tf.Variable(tf.zeros([categories]))
     y = tf.nn.softmax(tf.matmul(x, W) + b)
     loss = -tf.reduce_mean(y_*tf.log(y))
     update = tf.train.GradientDescentOptimizer(0.00001).minimize(loss)
     # Type: <class 'numpy.ndarray'>
-    data_x = [data[i].mfcc for i in range(len(data))]
+    data_x = np.array([data[i].mfcc for i in range(len(data))])
     data_y = np.array([data[i].accent for i in range(len(data))])
-    print(data_x)
-    print(data_y)
+
+    print(data_y.shape)
     sess = tf.Session()
     sess.run(tf.global_variables_initializer())
     for i in range(0, 10000):
