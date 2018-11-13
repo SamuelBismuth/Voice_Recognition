@@ -3,7 +3,7 @@ from Mfcc import wav_to_mfcc
 
 class Record:
 
-    def __init__(self, accent, path):
+    def __init__(self, accent, array_mfcc):
         """
         Constructor
         :param accent: String.
@@ -19,6 +19,14 @@ class Record:
             self.accent = [0, 0, 0, 1, 0]
         if accent == "Israel":
             self.accent = [0, 0, 0, 0, 1]
-        self.mfcc = wav_to_mfcc(path)
+        self.mfcc = array_mfcc
 
-    
+    def to_string(self):
+        print("Accent : [")
+        for i in range(len(self.accent)):
+            print(self.accent[i], ", ")
+        print("]")
+        print("Mfcc : [")
+        for i in range(len(self.mfcc)):
+            print(self.mfcc[i], ", ")
+        print("]")
