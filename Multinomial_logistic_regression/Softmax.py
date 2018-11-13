@@ -5,15 +5,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # number of features
-num_features = 100
+num_features = 3800
 # number of target labels
 num_labels = 5
 # learning rate (alpha)
-learning_rate = 0.008
+learning_rate = 0.01
 # batch size
-batch_size = 10
+batch_size = 200
 # number of epochs
-num_steps = 1001
+num_steps = 5001
 
 # initialize a tensorflow graph
 graph = tf.Graph()
@@ -92,6 +92,8 @@ def softmax(data):
 
             print("\nTest accuracy: {:.1f}%".format(
                 accuracy(test_prediction.eval(), test_labels)))
+            # print("prediction: ", test_prediction.eval())
+            # print("Answer: ", test_labels)
 
             plt.plot(range(len(cost_history)), cost_history)
             plt.axis([0, num_steps, 0, np.max(cost_history)])
