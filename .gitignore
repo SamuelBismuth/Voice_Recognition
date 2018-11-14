@@ -104,4 +104,4 @@ venv.bak/
 .mypy_cache/
 
 #idea
-Multinomial_logistic_regression/.idea
+.idea/
