@@ -5,15 +5,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # number of features
-num_features = 1287
+num_features = 12950
 # number of target labels
 num_labels = 5
 # learning rate (alpha)
-learning_rate = 0.7
+learning_rate = 0.05
 # batch size
-batch_size = 1000
+batch_size = 100
 # number of epochs
-num_steps = 250
+num_steps = 500
 # initialize a tensorflow graph
 graph = tf.Graph()
 
@@ -26,12 +26,10 @@ def accuracy(predictions, labels):
 
 
 def softmax(data):
-    train_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.80))])
-    train_labels = np.array([data[i].accent for i in range(int(len(data)*0.80))])
-    test_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.80), int(len(data)*0.90))]).astype(np.float32)
-    test_labels = np.array([data[i].accent for i in range(int(len(data)*0.80), int(len(data)*0.90))])
-    valid_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.90), len(data))]).astype(np.float32)
-    valid_labels = np.array([data[i].accent for i in range(int(len(data)*0.90), len(data))])
+    train_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.70))])
+    train_labels = np.array([data[i].accent for i in range(int(len(data)*0.70))])
+    test_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.70), int(len(data)))]).astype(np.float32)
+    test_labels = np.array([data[i].accent for i in range(int(len(data)*0.70), int(len(data)))])
 
     with graph.as_default():
         """ 
@@ -41,7 +39,6 @@ def softmax(data):
         # Inputs
         tf_train_dataset = tf.placeholder(tf.float32, shape=(batch_size, num_features))
         tf_train_labels = tf.placeholder(tf.float32, shape=(batch_size, num_labels))
-        tf_valid_dataset = tf.constant(valid_dataset)
         tf_test_dataset = tf.constant(test_dataset)
 
         # Variables.
@@ -58,7 +55,6 @@ def softmax(data):
 
         # Predictions for the training, validation, and test data.
         train_prediction = tf.nn.softmax(logits)
-        valid_prediction = tf.nn.softmax(tf.matmul(tf_valid_dataset, weights) + biases)
         test_prediction = tf.nn.softmax(tf.matmul(tf_test_dataset, weights) + biases)
         cost_history = np.empty(shape=[1], dtype=float)
 
@@ -86,8 +82,6 @@ def softmax(data):
                     print("Minibatch loss at step {0}: {1}".format(step, l))
                     print("Minibatch accuracy: {:.1f}%".format(
                         accuracy(predictions, batch_labels)))
-                    print("Validation accuracy: {:.1f}%".format(
-                        accuracy(valid_prediction.eval(), valid_labels)))
 
             print("\nTest accuracy: {:.1f}%".format(
                 accuracy(test_prediction.eval(), test_labels)))
