@@ -20,13 +20,3 @@ class Record:
         if accent == "Israel":
             self.accent = [0, 0, 0, 0, 1]
         self.mfcc = array_mfcc
-
-    def to_string(self):
-        print("Accent : [")
-        for i in range(len(self.accent)):
-            print(self.accent[i], ", ")
-        print("]")
-        print("Mfcc : [")
-        for i in range(len(self.mfcc)):
-            print(self.mfcc[i], ", ")
-        print("]")
