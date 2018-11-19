@@ -9,11 +9,11 @@ num_features = 6450
 # number of target labels
 num_labels = 5
 # learning rate (alpha)
-learning_rate = 0.0001
+learning_rate = 0.05
 # batch size
 batch_size = 200
 # number of epochs
-num_steps = 1000
+num_steps = 10000
 # initialize a tensorflow graph
 graph = tf.Graph()
 
