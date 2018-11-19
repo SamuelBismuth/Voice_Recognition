@@ -5,15 +5,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # number of features
-num_features = 3874
+num_features = 6450
 # number of target labels
 num_labels = 5
 # learning rate (alpha)
-learning_rate = 0.05
+learning_rate = 0.0001
 # batch size
-batch_size = 100
+batch_size = 200
 # number of epochs
-num_steps = 500
+num_steps = 1000
 # initialize a tensorflow graph
 graph = tf.Graph()
 
