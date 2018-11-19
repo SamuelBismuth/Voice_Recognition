@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # number of features
-num_features = 12950
+num_features = 3874
 # number of target labels
 num_labels = 5
 # learning rate (alpha)
