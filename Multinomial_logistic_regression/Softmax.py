@@ -1,4 +1,5 @@
 # https://www.geeksforgeeks.org/softmax-regression-using-tensorflow/
+from random import shuffle
 
 import tensorflow as tf
 import numpy as np
@@ -13,7 +14,7 @@ learning_rate = 0.05
 # batch size
 batch_size = 200
 # number of epochs
-num_steps = 1000
+num_steps = 1200
 # initialize a tensorflow graph
 graph = tf.Graph()
 
@@ -31,18 +32,24 @@ def softmax(data):
     test_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.70), int(len(data)))]).astype(np.float32)
     test_labels = np.array([data[i].accent for i in range(int(len(data)*0.70), int(len(data)))])
 
+    shuffle(train_dataset)
+    shuffle(train_labels)
+    shuffle(test_dataset)
+    shuffle(test_labels)
+
     with graph.as_default():
         """ 
         defining all the nodes 
         """
-        # Parameters
-        
-        
-        display_step = 1
+
         
         # Network Parameters
         n_hidden_1 = 256 # 1st layer number of neurons
         n_hidden_2 = 256 # 2nd layer number of neurons
+        n_hidden_3 = 256 # 3rd layer number of neurons
+        n_hidden_4 = 256 # 4th layer number of neurons
+        n_hidden_5 = 256 # 5th layer number of neurons
+        n_hidden_6 = 256 # 6th layer number of neurons
         
         
         
@@ -54,11 +61,19 @@ def softmax(data):
         weights = {
             'h1': tf.Variable(tf.random_normal([num_features, n_hidden_1])),
             'h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
-            'out': tf.Variable(tf.random_normal([n_hidden_2, num_labels]))
+            'h3': tf.Variable(tf.random_normal([n_hidden_2, n_hidden_3])),
+            'h4': tf.Variable(tf.random_normal([n_hidden_3, n_hidden_4])),
+            'h5': tf.Variable(tf.random_normal([n_hidden_4, n_hidden_5])),
+            'h6': tf.Variable(tf.random_normal([n_hidden_5, n_hidden_6])),
+            'out': tf.Variable(tf.random_normal([n_hidden_6, num_labels]))
         }
         biases = {
             'b1': tf.Variable(tf.random_normal([n_hidden_1])),
             'b2': tf.Variable(tf.random_normal([n_hidden_2])),
+            'b3': tf.Variable(tf.random_normal([n_hidden_3])),
+            'b4': tf.Variable(tf.random_normal([n_hidden_4])),
+            'b5': tf.Variable(tf.random_normal([n_hidden_5])),
+            'b6': tf.Variable(tf.random_normal([n_hidden_6])),
             'out': tf.Variable(tf.random_normal([num_labels]))
         }
         
@@ -69,8 +84,16 @@ def softmax(data):
             layer_1 = tf.add(tf.matmul(x, weights['h1']), biases['b1'])
             # Hidden fully connected layer with 256 neurons
             layer_2 = tf.add(tf.matmul(layer_1, weights['h2']), biases['b2'])
+             # Hidden fully connected layer with 256 neurons
+            layer_3 = tf.add(tf.matmul(layer_2, weights['h3']), biases['b3'])
+            # Hidden fully connected layer with 256 neurons
+            layer_4 = tf.add(tf.matmul(layer_3, weights['h4']), biases['b4'])
+             # Hidden fully connected layer with 256 neurons
+            layer_5 = tf.add(tf.matmul(layer_4, weights['h5']), biases['b5'])
+            # Hidden fully connected layer with 256 neurons
+            layer_6 = tf.add(tf.matmul(layer_5, weights['h6']), biases['b6'])
             # Output fully connected layer with a neuron for each class
-            out_layer = tf.matmul(layer_2, weights['out']) + biases['out']
+            out_layer = tf.matmul(layer_6, weights['out']) + biases['out']
             return out_layer
         
         # Construct model
@@ -84,10 +107,11 @@ def softmax(data):
 
         
         # Define loss and optimizer
+        beta = 0.01
+        loss_regularizer  = tf.add_n([ tf.nn.l2_loss(weights[v]) for v in weights ])*beta
         loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
-            logits=logits, labels=Y))
-        regularizer = tf.nn.l2_loss(weights)
-        loss = tf.reduce_mean(loss + 0.01 * regularizer)
+            logits=logits, labels=Y) + loss_regularizer)
+        
         optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
         train_op = optimizer.minimize(loss)
 
