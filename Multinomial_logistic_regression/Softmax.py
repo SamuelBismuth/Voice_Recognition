@@ -32,10 +32,7 @@ def softmax(data):
     test_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.70), int(len(data)))]).astype(np.float32)
     test_labels = np.array([data[i].accent for i in range(int(len(data)*0.70), int(len(data)))])
 
-    shuffle(train_dataset)
-    shuffle(train_labels)
-    shuffle(test_dataset)
-    shuffle(test_labels)
+
 
     with graph.as_default():
         """ 
@@ -44,12 +41,12 @@ def softmax(data):
 
         
         # Network Parameters
-        n_hidden_1 = 256 # 1st layer number of neurons
+        n_hidden_1 = 512 # 1st layer number of neurons
         n_hidden_2 = 256 # 2nd layer number of neurons
-        n_hidden_3 = 256 # 3rd layer number of neurons
+        n_hidden_3 = 128 # 3rd layer number of neurons
         n_hidden_4 = 256 # 4th layer number of neurons
-        n_hidden_5 = 256 # 5th layer number of neurons
-        n_hidden_6 = 256 # 6th layer number of neurons
+        n_hidden_5 = 512 # 5th layer number of neurons
+        n_hidden_6 = 128 # 6th layer number of neurons
         
         
         
@@ -107,10 +104,12 @@ def softmax(data):
 
         
         # Define loss and optimizer
-        beta = 0.01
-        loss_regularizer  = tf.add_n([ tf.nn.l2_loss(weights[v]) for v in weights ])*beta
+       
         loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
-            logits=logits, labels=Y) + loss_regularizer)
+            logits=logits, labels=Y))
+        """beta = 0.01
+        loss_regularizer  = tf.add_n([ tf.nn.l2_loss(weights[v]) for v in weights ])*beta
+        loss = loss + loss_regularizer"""
         
         optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
         train_op = optimizer.minimize(loss)
