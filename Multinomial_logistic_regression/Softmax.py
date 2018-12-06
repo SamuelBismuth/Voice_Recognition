@@ -14,7 +14,7 @@ learning_rate = 0.05
 # batch size
 batch_size = 200
 # number of epochs
-num_steps = 1200
+num_steps = 1001
 # initialize a tensorflow graph
 graph = tf.Graph()
 
@@ -32,11 +32,7 @@ def softmax(data):
     test_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.70), int(len(data)))]).astype(np.float32)
     test_labels = np.array([data[i].accent for i in range(int(len(data)*0.70), int(len(data)))])
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 803ed61a6c95133ec94bf4151dd1a57a4ff9ee65
     with graph.as_default():
         """ 
         defining all the nodes 
@@ -44,12 +40,12 @@ def softmax(data):
 
         
         # Network Parameters
-        n_hidden_1 = 512 # 1st layer number of neurons
+        n_hidden_1 = 256 # 1st layer number of neurons
         n_hidden_2 = 256 # 2nd layer number of neurons
-        n_hidden_3 = 128 # 3rd layer number of neurons
+        """n_hidden_3 = 256 # 3rd layer number of neurons
         n_hidden_4 = 256 # 4th layer number of neurons
-        n_hidden_5 = 512 # 5th layer number of neurons
-        n_hidden_6 = 128 # 6th layer number of neurons
+        n_hidden_5 = 256 # 5th layer number of neurons
+        n_hidden_6 = 256 # 6th layer number of neurons"""
         
         
         
@@ -61,19 +57,19 @@ def softmax(data):
         weights = {
             'h1': tf.Variable(tf.random_normal([num_features, n_hidden_1])),
             'h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
-            'h3': tf.Variable(tf.random_normal([n_hidden_2, n_hidden_3])),
-            'h4': tf.Variable(tf.random_normal([n_hidden_3, n_hidden_4])),
-            'h5': tf.Variable(tf.random_normal([n_hidden_4, n_hidden_5])),
-            'h6': tf.Variable(tf.random_normal([n_hidden_5, n_hidden_6])),
-            'out': tf.Variable(tf.random_normal([n_hidden_6, num_labels]))
+            #'h3': tf.Variable(tf.random_normal([n_hidden_2, n_hidden_3])),
+            #'h4': tf.Variable(tf.random_normal([n_hidden_3, n_hidden_4])),
+            #'h5': tf.Variable(tf.random_normal([n_hidden_4, n_hidden_5])),
+            #'h6': tf.Variable(tf.random_normal([n_hidden_5, n_hidden_6])),
+            'out': tf.Variable(tf.random_normal([n_hidden_2, num_labels]))
         }
         biases = {
             'b1': tf.Variable(tf.random_normal([n_hidden_1])),
             'b2': tf.Variable(tf.random_normal([n_hidden_2])),
-            'b3': tf.Variable(tf.random_normal([n_hidden_3])),
-            'b4': tf.Variable(tf.random_normal([n_hidden_4])),
-            'b5': tf.Variable(tf.random_normal([n_hidden_5])),
-            'b6': tf.Variable(tf.random_normal([n_hidden_6])),
+            #'b3': tf.Variable(tf.random_normal([n_hidden_3])),
+            #'b4': tf.Variable(tf.random_normal([n_hidden_4])),
+            #'b5': tf.Variable(tf.random_normal([n_hidden_5])),
+            #'b6': tf.Variable(tf.random_normal([n_hidden_6])),
             'out': tf.Variable(tf.random_normal([num_labels]))
         }
         
@@ -85,15 +81,15 @@ def softmax(data):
             # Hidden fully connected layer with 256 neurons
             layer_2 = tf.add(tf.matmul(layer_1, weights['h2']), biases['b2'])
              # Hidden fully connected layer with 256 neurons
-            layer_3 = tf.add(tf.matmul(layer_2, weights['h3']), biases['b3'])
+            """layer_3 = tf.add(tf.matmul(layer_2, weights['h3']), biases['b3'])
             # Hidden fully connected layer with 256 neurons
             layer_4 = tf.add(tf.matmul(layer_3, weights['h4']), biases['b4'])
              # Hidden fully connected layer with 256 neurons
             layer_5 = tf.add(tf.matmul(layer_4, weights['h5']), biases['b5'])
             # Hidden fully connected layer with 256 neurons
             layer_6 = tf.add(tf.matmul(layer_5, weights['h6']), biases['b6'])
-            # Output fully connected layer with a neuron for each class
-            out_layer = tf.matmul(layer_6, weights['out']) + biases['out']
+            # Output fully connected layer with a neuron for each class"""
+            out_layer = tf.matmul(layer_2, weights['out']) + biases['out']
             return out_layer
         
         # Construct model
@@ -110,9 +106,9 @@ def softmax(data):
        
         loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
             logits=logits, labels=Y))
-        """beta = 0.01
+        beta = 0.01
         loss_regularizer  = tf.add_n([ tf.nn.l2_loss(weights[v]) for v in weights ])*beta
-        loss = loss + loss_regularizer"""
+        loss = tf.reduce_mean(loss + loss_regularizer)
         
         optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
         train_op = optimizer.minimize(loss)
