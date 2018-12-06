@@ -32,11 +32,7 @@ def softmax(data):
     test_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.70), int(len(data)))]).astype(np.float32)
     test_labels = np.array([data[i].accent for i in range(int(len(data)*0.70), int(len(data)))])
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 803ed61a6c95133ec94bf4151dd1a57a4ff9ee65
     with graph.as_default():
         """ 
         defining all the nodes 
@@ -101,9 +97,6 @@ def softmax(data):
           
         # Inputs
         tf_test_dataset = tf.constant(test_dataset)
-
-
-
 
         
         # Define loss and optimizer
