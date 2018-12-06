@@ -98,9 +98,6 @@ def softmax(data):
         # Inputs
         tf_test_dataset = tf.constant(test_dataset)
 
-
-
-
         
         # Define loss and optimizer
        
