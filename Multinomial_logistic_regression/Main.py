@@ -5,6 +5,7 @@ from Read_csv import data
 from Record import Record
 from Softmax import softmax
 from prepare_wav import song_time, divide_audio
+import pickle
 
 if __name__ == "__main__":
     # Converting csv to python object.
@@ -16,6 +17,10 @@ if __name__ == "__main__":
         song_final_time = int(song_time(data.Path[line])) - int(song_time(data.Path[line])) % 5
         for i in range(0, song_final_time, 5):
             records_array.append(Record(data.Accent[line], wav_to_mfcc(divide_audio(data.Path[line], i, i + 5))[0:6450]))
+    with open('data.txt', 'wb') as fp:
+        pickle.dump(records_array, fp)
+    with open ('data.txt', 'rb') as fp:
+        records_array = pickle.load(fp)
     print ("Done")
     shuffle(records_array)
     softmax(records_array)

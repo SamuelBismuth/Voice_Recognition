@@ -86,6 +86,8 @@ def softmax(data):
         # Define loss and optimizer
         loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
             logits=logits, labels=Y))
+        regularizer = tf.nn.l2_loss(weights)
+        loss = tf.reduce_mean(loss + 0.01 * regularizer)
         optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
         train_op = optimizer.minimize(loss)
 
