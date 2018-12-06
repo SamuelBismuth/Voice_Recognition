@@ -32,11 +32,6 @@ def softmax(data):
     test_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.70), int(len(data)))]).astype(np.float32)
     test_labels = np.array([data[i].accent for i in range(int(len(data)*0.70), int(len(data)))])
 
-    shuffle(train_dataset)
-    shuffle(train_labels)
-    shuffle(test_dataset)
-    shuffle(test_labels)
-
     with graph.as_default():
         """ 
         defining all the nodes 

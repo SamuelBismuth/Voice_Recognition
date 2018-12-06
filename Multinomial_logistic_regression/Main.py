@@ -23,4 +23,5 @@ if __name__ == "__main__":
     with open ('data.txt', 'rb') as fp:
         records_array = pickle.load(fp)
     print ("Done")
+    shuffle(records_array)
     softmax(records_array)
