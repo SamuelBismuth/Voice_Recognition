@@ -4,16 +4,16 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
-# number of features
+# number of features - n_input
 num_features = 6450
-# number of target labels
+# number of target labels - n_classes
 num_labels = 5
 # learning rate (alpha)
 learning_rate = 0.05
 # batch size
 batch_size = 200
 # number of epochs
-num_steps = 10000
+num_steps = 1000
 # initialize a tensorflow graph
 graph = tf.Graph()
 
@@ -35,27 +35,65 @@ def softmax(data):
         """ 
         defining all the nodes 
         """
-
+        # Parameters
+        
+        
+        display_step = 1
+        
+        # Network Parameters
+        n_hidden_1 = 256 # 1st layer number of neurons
+        n_hidden_2 = 256 # 2nd layer number of neurons
+        
+        
+        
+        # tf Graph input
+        X = tf.placeholder("float", [batch_size, num_features])
+        Y = tf.placeholder("float", [batch_size, num_labels])
+        
+        # Store layers weight & bias
+        weights = {
+            'h1': tf.Variable(tf.random_normal([num_features, n_hidden_1])),
+            'h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
+            'out': tf.Variable(tf.random_normal([n_hidden_2, num_labels]))
+        }
+        biases = {
+            'b1': tf.Variable(tf.random_normal([n_hidden_1])),
+            'b2': tf.Variable(tf.random_normal([n_hidden_2])),
+            'out': tf.Variable(tf.random_normal([num_labels]))
+        }
+        
+        
+        # Create model
+        def multilayer_perceptron(x):
+            # Hidden fully connected layer with 256 neurons
+            layer_1 = tf.add(tf.matmul(x, weights['h1']), biases['b1'])
+            # Hidden fully connected layer with 256 neurons
+            layer_2 = tf.add(tf.matmul(layer_1, weights['h2']), biases['b2'])
+            # Output fully connected layer with a neuron for each class
+            out_layer = tf.matmul(layer_2, weights['out']) + biases['out']
+            return out_layer
+        
+        # Construct model
+        logits = multilayer_perceptron(X)
+          
         # Inputs
-        tf_train_dataset = tf.placeholder(tf.float32, shape=(batch_size, num_features))
-        tf_train_labels = tf.placeholder(tf.float32, shape=(batch_size, num_labels))
         tf_test_dataset = tf.constant(test_dataset)
 
-        # Variables.
-        weights = tf.Variable(tf.truncated_normal([num_features, num_labels]))
-        biases = tf.Variable(tf.zeros([num_labels]))
 
-        # Training computation.
-        logits = tf.matmul(tf_train_dataset, weights) + biases
+
+
+        
+        # Define loss and optimizer
         loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
-            labels=tf_train_labels, logits=logits))
+            logits=logits, labels=Y))
+        optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
+        train_op = optimizer.minimize(loss)
 
-        # Optimizer.
-        optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
+       
 
         # Predictions for the training, validation, and test data.
         train_prediction = tf.nn.softmax(logits)
-        test_prediction = tf.nn.softmax(tf.matmul(tf_test_dataset, weights) + biases)
+        test_prediction = tf.nn.softmax(multilayer_perceptron(tf_test_dataset))
         cost_history = np.empty(shape=[1], dtype=float)
 
         with tf.Session(graph=graph) as session:
@@ -71,11 +109,11 @@ def softmax(data):
                 batch_labels = train_labels[offset:(offset + batch_size), :]
 
                 # Prepare the feed dict
-                feed_dict = {tf_train_dataset: batch_data,
-                             tf_train_labels: batch_labels}
+                feed_dict = {X: batch_data,
+                             Y: batch_labels}
 
                 # run one step of computation
-                _, l, predictions = session.run([optimizer, loss, train_prediction],
+                _, l, predictions = session.run([train_op, loss, train_prediction],
                                                 feed_dict=feed_dict)
                 cost_history = np.append(cost_history, session.run(loss, feed_dict=feed_dict))
                 if step % 200 == 0:
