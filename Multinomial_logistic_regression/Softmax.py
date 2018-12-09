@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # number of features - n_input
-num_features = 6450
+num_features = 3874
 # number of target labels - n_classes
 num_labels = 5
 # learning rate (alpha)
@@ -29,6 +29,7 @@ def accuracy(predictions, labels):
 def softmax(data):
     train_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.70))])
     train_labels = np.array([data[i].accent for i in range(int(len(data)*0.70))])
+    print(len(data)*0.70)
     test_dataset = np.array([data[i].mfcc for i in range(int(len(data)*0.70), int(len(data)))]).astype(np.float32)
     test_labels = np.array([data[i].accent for i in range(int(len(data)*0.70), int(len(data)))])
 
