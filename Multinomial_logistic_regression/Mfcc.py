@@ -11,6 +11,4 @@ def wav_to_mfcc(path):
     for i in range(len(mfcc_feat)):
         for j in range(len(mfcc_feat[0])):
             array_mfcc.append(mfcc_feat[i][j])
-    if(len(array_mfcc)<3887):
-        print(len(array_mfcc))
     return array_mfcc
