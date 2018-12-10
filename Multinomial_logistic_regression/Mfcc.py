@@ -1,5 +1,5 @@
-from python_speech_features import mfcc
 import scipy.io.wavfile as wav
+from python_speech_features import mfcc
 
 
 def wav_to_mfcc(path):
