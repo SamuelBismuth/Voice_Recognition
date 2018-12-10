@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
     start_passed_info = 0
     end_passed_info = 0
-    chunk = 500
+    chunk = 230
     i = 0
     print(len(records_array))
     while end_passed_info < len(records_array):
@@ -36,7 +36,7 @@ if __name__ == "__main__":
         i += 1"""
 
     records_array = []
-    for j in range(4):
+    for j in range(10):
         with open('Data/data' + str(j) + '.txt', 'rb') as fp:
             records_array.extend(pickle.load(fp))
     shuffle(records_array)
