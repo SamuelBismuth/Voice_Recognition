@@ -26,7 +26,7 @@ Notice that the running time is long since our project is not finish yet (once t
 - [x] Classing mfcc into folders ready to be read. [@yoshago]( https://github.com/yoshago )
 - [x] Adding hidden layers. [@yoshago]( https://github.com/yoshago )  [@SamuelBismuth]( https://github.com/SamuelBismuth )
 - [x] Adding regularization. [@yoshago]( https://github.com/yoshago )  [@SamuelBismuth]( https://github.com/SamuelBismuth )
-- [ ] Paper. [@SamuelBismuth]( https://github.com/SamuelBismuth )
+- [x] Paper. [@SamuelBismuth]( https://github.com/SamuelBismuth )
 - [ ] Cheking the paper and submitting. [@Yishay1]( https://github.com/Yishay1 ) [@SamuelBismuth]( https://github.com/SamuelBismuth ) [@yoshago]( https://github.com/yoshago )
 
 
