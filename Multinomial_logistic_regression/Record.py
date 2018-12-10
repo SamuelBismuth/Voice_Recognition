@@ -1,6 +1,3 @@
-from Mfcc import wav_to_mfcc
-
-
 class Record:
 
     def __init__(self, accent, array_mfcc):
