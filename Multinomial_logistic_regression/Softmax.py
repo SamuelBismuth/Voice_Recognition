@@ -6,7 +6,6 @@ import tensorflow as tf
 
 # Parameters
 learning_rate = 0.05
-training_epochs = 60
 batch_size = 600
 num_steps = 60
 
