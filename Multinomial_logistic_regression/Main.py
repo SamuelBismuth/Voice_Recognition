@@ -1,7 +1,11 @@
 import pickle
 from random import shuffle
 
+from Mfcc import wav_to_mfcc
+from Read_csv import data
+from Record import Record
 from Softmax import softmax
+from prepare_wav import song_time, divide_audio
 
 if __name__ == "__main__":
     # Converting csv to python object.

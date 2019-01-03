@@ -10,8 +10,9 @@ batch_size = 600
 num_steps = 60
 
 # Network Parameters
-n_hidden_1 = 256  # 1st layer number of neurons
-n_hidden_2 = 256  # 2nd layer number of neurons
+n_hidden_1 = 12960  # 1st layer number of neurons
+n_hidden_2 = 12960  # 2nd layer number of neurons
+cnn_hidden = 12960
 n_input = 12960  # Data input (array size)
 n_classes = 5  # Total classes (0-4 languages)
 
@@ -39,11 +40,13 @@ def softmax(data):
 
         # Store layers weight & bias
         weights = {
-            'h1': tf.Variable(tf.random_normal([n_input, n_hidden_1])),
+            'hcnn': tf.Variable(tf.random_normal([n_input, cnn_hidden])),
+            'h1': tf.Variable(tf.random_normal([cnn_hidden, n_hidden_1])),
             'h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
             'out': tf.Variable(tf.random_normal([n_hidden_2, n_classes]))
         }
         biases = {
+            'bcnn': tf.Variable(tf.random_normal([n_input])),
             'b1': tf.Variable(tf.random_normal([n_hidden_1])),
             'b2': tf.Variable(tf.random_normal([n_hidden_2])),
             'out': tf.Variable(tf.random_normal([n_classes]))
@@ -53,14 +56,33 @@ def softmax(data):
         def multilayer_perceptron(x):
             # Hidden fully connected layer with 256 neurons
             layer_1 = tf.nn.relu(tf.matmul(x, weights['h1']) + biases['b1'])
+            print("hello4")
             # Hidden fully connected layer with 256 neurons
             layer_2 = tf.nn.relu(tf.matmul(layer_1, weights['h2']) + biases['b2'])
+            print("hello5")
             # Output fully connected layer with a neuron for each class
             out_layer = tf.matmul(layer_2, weights['out']) + biases['out']
             return out_layer
 
+
         # Construct model
-        logits = multilayer_perceptron(X)
+
+        X = tf.reshape(X, shape=[-1, 12960, 1])
+        print("hello0")
+
+        logits = tf.layers.conv1d(X, 32, 40, activation=tf.nn.leaky_relu)
+        print("hello1")
+
+        logits = tf.reshape(logits, shape=[-1, 12960])
+
+        logits = tf.nn.bias_add(logits, biases['bcnn'])
+        print("hello2")
+
+        logits = tf.nn.relu(logits)
+
+        print("hello3")
+
+        logits = multilayer_perceptron(logits)
 
         # Inputs
         tf_test_dataset = tf.constant(test_dataset)
