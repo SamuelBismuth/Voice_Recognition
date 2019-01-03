@@ -84,73 +84,42 @@ def softmax(data):
         }
 
         logits = recurrent_neural_network_model()
-
-        # Construct model
-        #logits = multilayer_perceptron(X, weights, biases)
-
-        print("layers done")
-
-        # Inputs
-        tf_test_dataset = tf.constant(test_dataset)
-        print("here1")
-
+        prediction = tf.nn.softmax(logits)
 
         # Define loss and optimizer
-        loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
+        loss_op = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
             logits=logits, labels=Y))
-        print("here2")
-        beta = 0.01
-        loss_regularizer = tf.add_n([tf.nn.l2_loss(weights[v]) for v in weights]) * beta
-        loss = tf.reduce_mean(loss + loss_regularizer)
+        optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
+        train_op = optimizer.minimize(loss_op)
 
-        print("here3")
+        # Evaluate model (with test logits, for dropout to be disabled)
+        correct_pred = tf.equal(tf.argmax(prediction, 1), tf.argmax(Y, 1))
+        accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 
+        # Initialize the variables (i.e. assign their default value)
+        init = tf.global_variables_initializer()
 
-        #optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
-        #train_op = optimizer.minimize(loss)
+        # Start training
+        with tf.Session() as sess:
 
-        print("here4")
+            # Run the initializer
+            sess.run(init)
 
-        # Predictions for the training, validation, and test data.
-        train_prediction = tf.nn.softmax(logits)
-        test_prediction = tf.nn.softmax(multilayer_perceptron(tf_test_dataset, weights, biases))
-        cost_history = np.empty(shape=[1], dtype=float)
+            for step in range(1, num_steps + 1):
+                batch_x = train_dataset
+                batch_y = test_dataset
+                # Run optimization op (backprop)
+                sess.run(train_op, feed_dict={X: batch_x, Y: batch_y})
+                if step % 10 == 0 or step == 1:
+                    # Calculate batch loss and accuracy
+                    print("hello1")
+                    loss, acc = sess.run([loss_op, accuracy], feed_dict={X: batch_x,
+                                                                         Y: batch_y})
+                    print("hello2")
+                    print("Step " + str(step) + ", Minibatch Loss= " + \
+                          "{:.4f}".format(loss) + ", Training Accuracy= " + \
+                          "{:.3f}".format(acc))
 
-        print("here5")
-
-        with tf.Session(graph=graph) as session:
-            # initialize weights and biases
-            tf.global_variables_initializer().run()
-            print("Initialized")
-            for step in range(num_steps):
-                # pick a randomized offset
-                offset = np.random.randint(0, train_labels.shape[0] - batch_size - 1)
-                print("here6")
-
-                # Generate a minibatch.
-                batch_data = train_dataset[offset:(offset + batch_size), :]
-                batch_labels = train_labels[offset:(offset + batch_size), :]
-                print("here7")
-
-                # Prepare the feed dict
-                feed_dict = {X: batch_data,
-                             Y: batch_labels}
-                print("here8")
-
-                # run one step of computation
-                _, l, predictions = session.run([loss, train_prediction],
-                                                feed_dict=feed_dict)
-                print("here9")
-                cost_history = np.append(cost_history, session.run(loss, feed_dict=feed_dict))
-                print("here10")
-                if step % 10 == 0:
-                    print("Minibatch loss at step {0}: {1}".format(step, l))
-                    print("Minibatch accuracy: {:.1f}%".format(
-                        accuracy(predictions, batch_labels)))
-
-            print("\nTest accuracy: {:.1f}%".format(
-                accuracy(test_prediction.eval(), test_labels)))
-
-            plt.plot(range(len(cost_history)), cost_history)
-            plt.axis([0, num_steps, 0, np.max(cost_history)])
-            plt.show()
+            print("Optimization Finished!")
+            print("Testing Accuracy:", \
+                  sess.run(accuracy, feed_dict={X: test_dataset, Y: test_labels}))
