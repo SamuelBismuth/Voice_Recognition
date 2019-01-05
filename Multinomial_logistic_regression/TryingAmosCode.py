@@ -87,10 +87,10 @@ def test(data):
     b_conv2 = tf.Variable(tf.constant(0.1, shape=[64]))
 
     h_conv2 = tf.nn.relu(tf.nn.conv2d(h_pool1, W_conv2, strides=[1, 1, 1, 1], padding='SAME') + b_conv2)
-    h_pool2 = tf.nn.max_pool(h_conv2, ksize=[1, 1, 3, 1], strides=[1, 1, 1, 1], padding='SAME')
+    h_pool2 = tf.nn.max_pool(h_conv2, ksize=[1, 13, 23, 1], strides=[1, 13, 23, 1], padding='SAME')
 
-    h_pool2_flat = tf.reshape(h_pool2, [-1, 128 * 23 * 64])
-    W_fc1 = tf.Variable(tf.truncated_normal([128 * 23 * 64, 1024], stddev=0.1))
+    h_pool2_flat = tf.reshape(h_pool2, [-1, 16 * 16 * 64])
+    W_fc1 = tf.Variable(tf.truncated_normal([16 * 16 * 64, 1024], stddev=0.1))
     b_fc1 = tf.Variable(tf.constant(0.1, shape=[1024]))
 
     h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
