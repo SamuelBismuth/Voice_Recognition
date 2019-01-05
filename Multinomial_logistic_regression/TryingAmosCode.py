@@ -81,16 +81,17 @@ def test(data):
     x_image = tf.reshape(x, [-1, 299, 13, 1])  # if we had RGB, we would have 3 channels
 
     h_conv1 = tf.nn.relu(tf.nn.conv2d(x_image, W_conv1, strides=[1, 1, 1, 1], padding='SAME') + b_conv1)
-    h_pool1 = tf.nn.max_pool(h_conv1, ksize=[1, 13, 13, 1], strides=[1, 13, 13, 1], padding='SAME')
+    h_pool1 = tf.nn.max_pool(h_conv1, ksize=[1, 13, 13, 1], strides=[1, 13, 13, 1], padding='VALID')
 
     W_conv2 = tf.Variable(tf.truncated_normal([10, 10, 32, 64], stddev=0.1))
     b_conv2 = tf.Variable(tf.constant(0.1, shape=[64]))
+    print(h_pool1)
 
     #h_conv2 = tf.nn.relu(tf.nn.conv2d(h_pool1, W_conv2, strides=[1, 1, 1, 1], padding='SAME') + b_conv2)
     #h_pool2 = tf.nn.max_pool(h_conv2, ksize=[1, 13, 23, 1], strides=[1, 13, 23, 1], padding='SAME')
 
-    h_pool2_flat = tf.reshape(h_pool1, [-1, 64 * 23 * 64])
-    W_fc1 = tf.Variable(tf.truncated_normal([64 * 23 * 64, 1024], stddev=0.1))
+    h_pool2_flat = tf.reshape(h_pool1, [-1, 1 * 23 * 32])
+    W_fc1 = tf.Variable(tf.truncated_normal([23 * 1 * 32, 1024], stddev=0.1))
     b_fc1 = tf.Variable(tf.constant(0.1, shape=[1024]))
 
     h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
