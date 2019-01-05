@@ -5,6 +5,7 @@ from Mfcc import wav_to_mfcc
 from Read_csv import data
 from Record import Record
 from Softmax import softmax
+from TryingAmosCode import test
 from prepare_wav import song_time, divide_audio
 
 if __name__ == "__main__":
@@ -40,4 +41,5 @@ if __name__ == "__main__":
         with open('Data/data' + str(j) + '.txt', 'rb') as fp:
             records_array.extend(pickle.load(fp))
     shuffle(records_array)
-    softmax(records_array)
+    #softmax(records_array)
+    test(records_array)
