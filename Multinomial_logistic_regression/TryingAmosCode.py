@@ -18,7 +18,7 @@ def next_batch(num, data, labels):
 # Network Parameters
 n_hidden_1 = 256  # 1st layer number of neurons
 n_hidden_2 = 256  # 2nd layer number of neurons
-n_input = 3887  # Data input (array size)
+n_input = 1024  # Data input (array size)
 n_classes = 5  # Total classes (0-4 languages)
 
 # Store layers weight & bias
@@ -107,7 +107,7 @@ def test(data):
 
     print("hui3")
 
-    y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
+    y_conv = multilayer_perceptron(h_fc1_drop)
 
 
     print("hui4")
