@@ -16,7 +16,6 @@ def next_batch(num, data, labels):
     labels_shuffle = [labels[ i] for i in idx]
     return np.asarray(data_shuffle), np.asarray(labels_shuffle)
 
-
 # Network Parameters
 n_hidden_1 = 256  # 1st layer number of neurons
 n_hidden_2 = 256  # 2nd layer number of neurons
