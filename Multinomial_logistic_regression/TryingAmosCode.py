@@ -11,8 +11,9 @@ def next_batch(num, data, labels):
     idx = np.arange(0, len(data))
     np.random.shuffle(idx)
     idx = idx[:num]
-    data_shuffle = [data[i] for i in idx]
-    labels_shuffle = [labels[i] for i in idx]
+
+    data_shuffle = [data[ i] for i in idx]
+    labels_shuffle = [labels[ i] for i in idx]
     return np.asarray(data_shuffle), np.asarray(labels_shuffle)
 
 
@@ -48,8 +49,9 @@ def multilayer_perceptron(x, keep_prob):
 
 
 def test(data):
-    x = 0
-    while (x < len(data)):
+    x=0
+    while(x<len(data)):
+        
 
         data[x].mfcc = data[x].mfcc.flatten()[:784]
         """if(data[x].accent==[1, 0, 0, 0, 0]):
@@ -94,6 +96,7 @@ def test(data):
 
     keep_prob = tf.placeholder(tf.float32)
     y_conv = multilayer_perceptron(h_pool2_flat, keep_prob)
+
 
     print("hui4")
 
