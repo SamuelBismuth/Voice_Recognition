@@ -96,25 +96,16 @@ def test(data):
     keep_prob = tf.placeholder(tf.float32)
     y_conv = multilayer_perceptron(h_pool2_flat, keep_prob)
 
-
-    print("hui4")
-
     cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y_conv), reduction_indices=[1]))
-    print("hui5")
 
     train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)  # uses moving averages momentum
-    print("hui6")
 
     correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
-    print("hui7")
 
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-    print("hui8")
 
     sess = tf.InteractiveSession()
     sess.run(tf.global_variables_initializer())
-
-    print("hello")
 
     for i in range(40000):
         batch = next_batch(800, train_dataset, train_labels)
