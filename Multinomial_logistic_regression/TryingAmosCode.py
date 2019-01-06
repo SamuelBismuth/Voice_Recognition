@@ -8,18 +8,18 @@ def next_batch(num, data, labels):
     '''
     Return a total of `num` random samples and labels.
     '''
-    idx = np.arange(0 , len(data))
+    idx = np.arange(0, len(data))
     np.random.shuffle(idx)
     idx = idx[:num]
-    data_shuffle = [data[ i] for i in idx]
-    labels_shuffle = [labels[ i] for i in idx]
-    data_shuffle = [data_shuffle[i][0:12544] for i in range(0, 50)]
+    data_shuffle = [data[i] for i in idx]
+    labels_shuffle = [labels[i] for i in idx]
     return np.asarray(data_shuffle), np.asarray(labels_shuffle)
+
 
 # Network Parameters
 n_hidden_1 = 256  # 1st layer number of neurons
 n_hidden_2 = 256  # 2nd layer number of neurons
-n_input = 5  # Data input (array size)
+n_input = 7 * 7 * 64  # / Data input (array size)
 n_classes = 5  # Total classes (0-4 languages)
 
 # Store layers weight & bias
@@ -36,10 +36,11 @@ biases = {
 
 
 # Create model
-def multilayer_perceptron(x):
+def multilayer_perceptron(x, keep_prob):
     # Hidden fully connected layer with 256 neurons
     layer_1 = tf.nn.relu(tf.matmul(x, weights['h1']) + biases['b1'])
     # Hidden fully connected layer with 256 neurons
+    layer_1 = tf.nn.dropout(layer_1, keep_prob)
     layer_2 = tf.nn.relu(tf.matmul(layer_1, weights['h2']) + biases['b2'])
     # Output fully connected layer with a neuron for each class
     out_layer = tf.matmul(layer_2, weights['out']) + biases['out']
@@ -47,6 +48,25 @@ def multilayer_perceptron(x):
 
 
 def test(data):
+    x = 0
+    while (x < len(data)):
+
+        data[x].mfcc = data[x].mfcc.flatten()[:784]
+        """if(data[x].accent==[1, 0, 0, 0, 0]):
+            data[x].accent=0
+        elif(data[x].accent==[0, 1, 0, 0, 0]):
+            data[x].accent=1
+        elif(data[x].accent==[0, 0, 1, 0, 0]):
+            data[x].accent=2
+        elif(data[x].accent==[0, 0, 0, 1, 0]):
+            data[x].accent=3
+        elif(data[x].accent==[0, 0, 0, 0, 1]):
+            data[x].accent=4"""
+        if (len(data[x].mfcc) != 784):
+            del data[x]
+        else:
+            x = x + 1
+
     train_dataset = np.array([data[i].mfcc for i in range(int(len(data) * 0.70))])
     train_labels = np.array([data[i].accent for i in range(int(len(data) * 0.70))])
     test_dataset = np.array([data[i].mfcc for i in range(int(len(data) * 0.70), int(len(data)))]).astype(np.float32)
@@ -54,7 +74,7 @@ def test(data):
 
     print(train_dataset.shape)
 
-    x = tf.placeholder(tf.float32, shape=[None, 12544])
+    x = tf.placeholder(tf.float32, shape=[None, 784])
     y_ = tf.placeholder(tf.float32, shape=[None, 5])
 
     W_conv1 = tf.Variable(tf.truncated_normal([5, 5, 1, 32], stddev=0.1))
@@ -71,25 +91,9 @@ def test(data):
     h_pool2 = tf.nn.max_pool(h_conv2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
 
     h_pool2_flat = tf.reshape(h_pool2, [-1, 7 * 7 * 64])
-    W_fc1 = tf.Variable(tf.truncated_normal([7 * 7 * 64, 1024], stddev=0.1))
-    b_fc1 = tf.Variable(tf.constant(0.1, shape=[1024]))
-
-    h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
 
     keep_prob = tf.placeholder(tf.float32)
-    h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
-
-    print("hui")
-    W_fc2 = tf.Variable(tf.truncated_normal([1024, 5], stddev=0.1))
-    print("hui2")
-
-    b_fc2 = tf.Variable(tf.constant(0.1, shape=[5]))
-
-    print("hui3")
-
-    y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
-
-    multilayer_perceptron(y_conv)
+    y_conv = multilayer_perceptron(h_pool2_flat, keep_prob)
 
     print("hui4")
 
@@ -110,17 +114,14 @@ def test(data):
 
     print("hello")
 
-    for i in range(400):
+    for i in range(40000):
         batch = next_batch(800, train_dataset, train_labels)
         if i % 100 == 0:
             print("hello2")
             print(batch[0].shape)
             print(batch[1].shape)
-            train_accurac400y = accuracy.eval(feed_dict={x: batch[0], y_: batch[1], keep_prob: 1.0})
+            train_accuracy = accuracy.eval(feed_dict={x: batch[0], y_: batch[1], keep_prob: 1.0})
             print("step %d, training accuracy %g" % (i, train_accuracy))
         train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
 
     print("test accuracy %g" % accuracy.eval(feed_dict={x: test_dataset, y_: test_labels, keep_prob: 1.0}))
-
-
-

@@ -37,9 +37,9 @@ if __name__ == "__main__":
         i += 1"""
 
     records_array = []
-    for j in range(7):
+    for j in range(8):
         with open('Data/data' + str(j) + '.txt', 'rb') as fp:
             records_array.extend(pickle.load(fp))
     shuffle(records_array)
-    #softmax(records_array)
-    test(records_array)
+    softmax(records_array)
+    #test(records_array)
